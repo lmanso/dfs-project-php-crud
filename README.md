@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # it-eval-php
 Validation PHP - [IT-Akademy](https://github.com/it-akademy)
 
@@ -16,3 +17,6 @@ git clone https://github.com/methbkts/it-eval-php.git
 ## Authors
 
 * **Metin BKTS** - [methbkts](https://github.com/methbkts)
+=======
+# dfs-project-php-crud
+>>>>>>> 2905279b9a0c621a024761f6e0a9ca43b7a4bd09
