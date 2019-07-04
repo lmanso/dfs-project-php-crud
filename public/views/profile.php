@@ -3,7 +3,7 @@ require_once('public/layouts/header.php');
 $users = getAllUsers();
 
 if (isset($_SESSION['username'])) {?>
-    echo 'Bonjour ' . $_SESSION['username'] . ' !';
+    <?= 'Bonjour ' . $_SESSION['username'] . ' !'; ?>
     <div class="card" style="width:400px">
   <img class="card-img-top" src="img_avatar1.png" alt="Card image">
   <div class="card-body">
