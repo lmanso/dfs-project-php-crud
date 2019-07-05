@@ -6,7 +6,7 @@ $articles = getUserArticles($user_id);
 
 if (isset($_SESSION['username'])) { ?>
   <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron shadow-2dp">
       <h1><?= $_SESSION['username']; ?></h1>
       <img class="" src="img_avatar1.png" alt="Card image">
       <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
@@ -18,7 +18,7 @@ if (isset($_SESSION['username'])) { ?>
 
 <div class="container">
   <div class="row">
-    <div class="col-9 overflow">
+    <div class="row-9 overflow">
       <h1 class="">Liste des articles :</h1>
       <?php foreach ($articles as $key => $value) : ?>
         <div class="" style="max-height: 90vh; max-width: 45vh">

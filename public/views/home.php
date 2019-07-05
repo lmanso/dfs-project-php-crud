@@ -38,4 +38,4 @@ $categories = getAllCategories();
     </div>
 </div>
 
-<?php require_once 'public/layouts/footer.php'; ?>
+<?php require_once 'public/layouts/footer.php'; 

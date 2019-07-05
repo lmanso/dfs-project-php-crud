@@ -1,4 +1,5 @@
 <?php
+/** GetAll */
 function getAllArticles()
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
@@ -8,18 +9,6 @@ function getAllArticles()
   LEFT JOIN users ON articles.user_id=users.id 
   LEFT JOIN categories ON articles.category_id=categories.id ;");
   $request->execute();
-  return $request->fetchAll(PDO::FETCH_ASSOC);
-}
-function getUserArticles($user_id)
-{
-  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
-  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT title, content, img, date, users.name as author, categories.name as category 
-  FROM articles 
-  LEFT JOIN users ON articles.user_id=users.id 
-  LEFT JOIN categories ON articles.category_id=categories.id WHERE user_id = $user_id ;");
-  $request->execute();
-  // var_dump($request->execute());die;
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -38,6 +27,20 @@ function getAllUsers()
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $request = $connec->prepare("SELECT * FROM users;");
   $request->execute();
+  return $request->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/** GetOne */
+function getUserArticles($user_id)
+{
+  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $request = $connec->prepare("SELECT title, content, img, date, users.name as author, categories.name as category 
+  FROM articles 
+  LEFT JOIN users ON articles.user_id=users.id 
+  LEFT JOIN categories ON articles.category_id=categories.id WHERE user_id = $user_id ;");
+  $request->execute();
+  // var_dump($request->execute());die;
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -76,6 +79,8 @@ function getUserName($username)
   ]);
   return $request->fetch(PDO::FETCH_ASSOC)["name"];
 }
+
+/** CHECK */
 function checkPassword($username)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
@@ -91,13 +96,14 @@ function checkRole($username)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
   $request = $connec->prepare("SELECT role FROM users WHERE name= :username;");
   $request->execute([
     ":username" => $username
   ]);
   return intval($request->fetch(PDO::FETCH_ASSOC)["role"]);
 }
-
+/** INSERT */
 function insertArticle($title, $content, $image, $author, $category)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
@@ -114,10 +120,11 @@ function insertArticle($title, $content, $image, $author, $category)
 
 function insertUser($name, $email, $password, $image)
 {
-
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("INSERT INTO user(name, email, password, image) VALUES (:name, :email, :password, :image);");
+
+  $request = $connec->prepare("INSERT INTO `users` (`name`, `role`, `password`)
+  VALUES ('Toto', '0', 'toto');");
   $request->execute([
     ":name" => $name,
     ":email" => $email,
@@ -125,3 +132,13 @@ function insertUser($name, $email, $password, $image)
     ":image" => $image,
   ]);
 }
+/** DELETE */
+function deleteUser($id)
+{
+  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $request = $connec->prepare("DELETE FROM `users`WHERE ((`id` = $id));");
+  $request->execute();
+}
+/** UPDATE */
