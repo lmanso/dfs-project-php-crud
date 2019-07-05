@@ -67,38 +67,38 @@ function getUserId($username)
   return intval($request->fetch(PDO::FETCH_ASSOC)["id"]);
 }
 
-function getUserName($username)
-{
-  $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
-  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT name FROM users WHERE name= :username;");
-  $request->execute([
-    ":username" => $username
-  ]);
-  return $request->fetch(PDO::FETCH_ASSOC)["name"];
-}
+// function getUserName($username)
+// {
+//   $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
+//   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//   $request = $connec->prepare("SELECT name FROM users WHERE name= :username;");
+//   $request->execute([
+//     ":username" => $username
+//   ]);
+//   return $request->fetch(PDO::FETCH_ASSOC)["name"];
+// }
 
 
 /** CHECK */
-function checkPassword($username)
+function checkPassword($id)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT password FROM users WHERE name= :username;");
+  $request = $connec->prepare("SELECT password FROM users WHERE id= :id;");
   $request->execute([
-    ":username" => $username
+    ":id" => $id
   ]);
   return $request->fetch(PDO::FETCH_ASSOC)["password"];
 }
 
-function checkRole($username)
+function checkRole($id)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $request = $connec->prepare("SELECT role FROM users WHERE name= :username;");
+  $request = $connec->prepare("SELECT role FROM users WHERE id= :id;");
   $request->execute([
-    ":username" => $username
+    ":id" => $id
   ]);
   return intval($request->fetch(PDO::FETCH_ASSOC)["role"]);
 }

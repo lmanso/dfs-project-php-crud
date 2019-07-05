@@ -1,11 +1,4 @@
-<!-- <?php
-session_start();
-require_once('./controllers/db.php');
-
-if (isset($_POST['username'])) {
-    $_SESSION['username'] = $_POST['username'];
-}
-?> -->
+<?php $id = getUserId( $_SESSION['username']); ?>
 
 <!doctype html>
 <html lang="fr">
@@ -49,7 +42,7 @@ if (isset($_POST['username'])) {
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <?php if (isset($_SESSION['username']) && checkRole($_SESSION['username']) === 1) { ?>
+                        <?php if (isset($_SESSION['username']) && checkRole($id) === 1) { ?>
                             <a class="nav-link" href="/admin">Administration</a>
                         <?php } ?>
                     </li>
