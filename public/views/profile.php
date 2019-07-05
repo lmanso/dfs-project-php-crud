@@ -8,8 +8,8 @@ if (isset($_SESSION['username'])) { ?>
   <div class="container">
     <div class="jumbotron shadow-2dp">
       <h1><?= $_SESSION['username']; ?></h1>
-      <img class="" src="img_avatar1.png" alt="Card image">
-      <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
+      <img class="" src="img_avatar1.png" alt="WIP">
+      <p>WIP</p>
     </div>
   </div>
 <?php } else {
@@ -40,4 +40,4 @@ if (isset($_SESSION['username'])) { ?>
   </div>
 </div>
 
-<?php require_once 'public/layouts/footer.php'; ?>
+<?php require_once 'public/layouts/footer.php'; 

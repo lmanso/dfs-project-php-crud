@@ -70,6 +70,11 @@ switch ($request_uri[0]) {
     header('Location: /');
     break;
 
+    case '/insertUser';
+    insertUser($_POST['name'], $_POST['password']);
+    header('Location: /');
+    break;
+
     //DEFAULT
   default:
     header('HTTP/1.0 404 Not Found');

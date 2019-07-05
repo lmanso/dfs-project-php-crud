@@ -2,7 +2,8 @@
 require_once('public/layouts/header.php');
 $users = getAllUsers();
 //Redirection si l'utilisateur n'est pas Admin
-if (checkRole($_SESSION['username']) === 1) { } else {
+if (checkRole($_SESSION['username']) === 1) { 
+} else {
     header('Location: /login');
 }
 ?>

@@ -118,18 +118,15 @@ function insertArticle($title, $content, $image, $author, $category)
   $request->execute();
 }
 
-function insertUser($name, $email, $password, $image)
+function insertUser($name, $password)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $request = $connec->prepare("INSERT INTO `users` (`name`, `role`, `password`)
-  VALUES ('Toto', '0', 'toto');");
+  $request = $connec->prepare("INSERT INTO users (name, password) VALUES ( :name, :password)");
   $request->execute([
     ":name" => $name,
-    ":email" => $email,
     ":password" => $password,
-    ":image" => $image,
   ]);
 }
 /** DELETE */
