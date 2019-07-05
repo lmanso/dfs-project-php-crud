@@ -43,17 +43,17 @@ function getUserArticles($user_id)
   // var_dump($request->execute());die;
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
-
-function getOneUser($mail, $password)
+// TODO: recuperer un user par son id
+function getOneUser($user_id)
 {
   $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT id, name FROM users WHERE mail = :mail AND password = :password;");
+  $request = $connec->prepare("SELECT name, role FROM users WHERE id = :id");
   $request->execute([
-    ":mail" => $mail,
-    ":password" => $$pass_hache,
+    ":id" => $id,
+    // ":password" => $$pass_hache,
   ]);
-  return $request->fetch(PDO::FETCH_ASSOC);
+  return $request->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getUserId($username)
@@ -64,8 +64,6 @@ function getUserId($username)
   $request->execute([
     ":username" => $username
   ]);
-  // var_dump(intval($request->fetchAll(PDO::FETCH_ASSOC)[0]["id"]));die;
-  // return $request->fetchAll(PDO::FETCH_ASSOC)[0]["id"];
   return intval($request->fetch(PDO::FETCH_ASSOC)["id"]);
 }
 
@@ -79,6 +77,7 @@ function getUserName($username)
   ]);
   return $request->fetch(PDO::FETCH_ASSOC)["name"];
 }
+
 
 /** CHECK */
 function checkPassword($username)
@@ -129,13 +128,28 @@ function insertUser($name, $password)
     ":password" => $password,
   ]);
 }
+
 /** DELETE */
 function deleteUser($id)
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $request = $connec->prepare("DELETE FROM `users`WHERE ((`id` = $id));");
+  $request = $connec->prepare("DELETE FROM `users` WHERE ((`id` = $id));");
   $request->execute();
 }
+
 /** UPDATE */
+function updateUser($id, $name, $role, $password)
+{
+  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  // UPDATE users (name, role, password) VALUES ( Paul, 1, word) WHERE id=10
+  $request = $connec->prepare("UPDATE users SET name = :name, role = :role, password = :password WHERE id= :id");
+  $request->execute([
+    ":id" => $id,
+    ":name" => $name,
+    ":role" => $role,
+    ":password" => $password,
+  ]);
+}

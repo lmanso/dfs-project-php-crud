@@ -28,6 +28,8 @@ switch ($request_uri[0]) {
     break;
 
   case '/update':
+    // $user = ($request_uri[1]);
+    // $user = getUserId($_SESSION['username']);
     require 'public/views/update.php';
     break;
 
@@ -46,6 +48,13 @@ switch ($request_uri[0]) {
 
   case '/logoutAction':
     require 'controllers/logoutAction.php';
+    break;
+
+  case '/updateAction':
+    // Recupere l'id de l'utilisateur dans l'uri
+    // var_dump($request_uri[1]);die;
+    updateUser($_POST['id'], $_POST['name'], $_POST['role'], $_POST['password']);
+    header('Location: /admin');
     break;
 
   case '/deleteAction':

@@ -1,7 +1,7 @@
 <?php
 require_once('public/layouts/header.php');
-$users = getAllUsers();
-//Redirection si l'utilisateur n'est pas Admin
+$request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
+$user_id = ($request_uri[1]);
 if (checkRole($_SESSION['username']) === 1) { 
 } else {
     header('Location: /login');
@@ -10,6 +10,7 @@ if (checkRole($_SESSION['username']) === 1) {
 <div class="container">
     <h1>update</h1>
     <form class="" action="/updateAction" method="post">
+    <input type="hidden" class="btn"  name="id" value="<?= $user_id ?>">
         <div class="form-group">
             <label for="Name">Name User</label>
             <input required type="text" class="form-control" name="name" placeholder="Modifier le nom utilisateur">
@@ -23,6 +24,8 @@ if (checkRole($_SESSION['username']) === 1) {
         </div>
         <label for="password">Password</label>
         <input required type="text" class="form-control" name="password"  placeholder="Modifier le password">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Modifier</button>
     </form>
 </div>
 <?php require_once 'public/layouts/footer.php';
