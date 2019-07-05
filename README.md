@@ -45,7 +45,6 @@ Fin d'épreuve anticipée
 En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à profit le temps restant à la préparation de votre dossier individuel de soutenance.
 
 ## Fonctionnement Ublog
-----
 * UBlog est un site avec articles de 143 caractères;
 * Chaque article a une catégories, un auteur, une date et une image;
 * Si l'utilisateur ne rentre pas d'image lors de la création d'un article celui-ci aura une image par défaut;
@@ -56,7 +55,6 @@ En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à pr
 * La homepage est public, elle regroupe les catégories et les articles.
 
 ## Stack
-----
 * Utilisation d'un theme bootswatch;
 * Utilisation de Fontawsome;
 * Mysql;
@@ -64,7 +62,6 @@ En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à pr
 * Adminer.
 
 ## Usage
-----
 * Nom de la db : ublog;
 * index sert de rooter;
 * les fonctions sql sont dans db.php;
@@ -72,7 +69,6 @@ En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à pr
 * Utilisation de controller.
 
 ## TODO
-----
 * Hacher les mots de passes et sécuriser l'envoie des requêtes;
 * Ajouter des photos utilisateurs et améliorer les profils de manière génerale;
 * Faire fonctionner le update des articles;
@@ -80,5 +76,4 @@ En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à pr
 * Donner le droit a l'utilisateur de modifier ses articles.
 
 ## Problemes
-----
 * Les requetes SQL notamment l'update.
