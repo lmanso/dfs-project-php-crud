@@ -82,4 +82,3 @@ En cas de rendu des travaux avant le terme du délai imparti, vous mettrez à pr
 ## Problemes
 ----
 * Les requetes SQL notamment l'update.
-
