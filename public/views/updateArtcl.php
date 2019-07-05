@@ -28,7 +28,7 @@ if (checkRole($id) === 1) {
                         <td><?= $value["img"] ?></td>
                         <td><?= $value["category"] ?></td>
                         <td><a href="/updateArtclAction?<?= $value["id_article"] ?>"><button type="button" class="btn btn-info shadow-2dp"><i class="fas fa-pen-square fa-lg"></i></button></a></td>
-                        <td><a href="/deleteAction?<?= $value["id_article"] ?>"><button id="<?= $value["id"] ?>" type="button" class="btn btn-danger shadow-2dp"><i class="fas fa-eraser fa-lg"></i></button></a></td>
+                        <td><a href="/deleteArtcAction?<?= $value["id_article"] ?>"><button id="<?= $value["id"] ?>" type="button" class="btn btn-danger shadow-2dp"><i class="fas fa-eraser fa-lg"></i></button></a></td>
                     </tr>
                 </tbody>
             <?php endforeach ?>

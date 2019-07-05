@@ -147,6 +147,15 @@ function deleteUser($id)
   $request->execute();
 }
 
+function deleteArticle($id)
+{
+  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $request = $connec->prepare("DELETE FROM `articles` WHERE ((`id` = $id));");
+  $request->execute();
+}
+
 /** UPDATE */
 function updateUser($id, $name, $role, $password)
 {

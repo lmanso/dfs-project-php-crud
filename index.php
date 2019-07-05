@@ -67,19 +67,26 @@ switch ($request_uri[0]) {
     break;
 
   case '/updateAAction':
-  if (empty($_POST['image'])) {
-    $image = 'https://picsum.photos/300/200';
-  } else {
-    $image = $_POST['image'];
-  }
+    if (empty($_POST['image'])) {
+      $image = 'https://picsum.photos/300/200';
+    } else {
+      $image = $_POST['image'];
+    }
     updateArtcl($_POST['id'], $_POST['title'], $_POST['content'], $image, $_POST['category']);
     header('Location: /updateArtcl');
     break;
 
+    //DELETE
   case '/deleteAction':
     // Recupere l'id de l'utilisateur dans l'uri
     deleteUser($request_uri[1]);
     header('Location: /admin');
+    break;
+
+  case '/deleteArtcAction':
+    // Recupere l'id de l'utilisateur dans l'uri
+    deleteArticle($request_uri[1]);
+    header('Location: /updateArtcl');
     break;
 
     //INSERT
