@@ -1,5 +1,3 @@
-<?php $id = getUserId( $_SESSION['username']); ?>
-
 <!doctype html>
 <html lang="fr">
 
@@ -28,6 +26,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/articles">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                    <?php if (isset($_SESSION['username']) && checkRole($id) === 1) { ?>
+                        <a class="nav-link" href="/updateArtcl">Update articles</a>
+                        <?php } ?>
                     </li>
                     <!-- Profil -->
                     <li class="nav-item">

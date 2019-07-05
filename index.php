@@ -5,6 +5,9 @@ require_once('./controllers/db.php');
 if (isset($_POST['username'])) {
   $_SESSION['username'] = $_POST['username'];
 }
+if (isset($_SESSION['username'])) {
+  $id = getUserId($_SESSION['username']);
+}
 
 $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
 
@@ -28,9 +31,15 @@ switch ($request_uri[0]) {
     break;
 
   case '/update':
-    // $user = ($request_uri[1]);
-    // $user = getUserId($_SESSION['username']);
     require 'public/views/update.php';
+    break;
+
+  case '/updateArtcl':
+    require 'public/views/updateArtcl.php';
+    break;
+
+  case '/updateArtclAction':
+    require 'public/views/updateArtclAction.php';
     break;
 
   case '/register':
@@ -57,6 +66,16 @@ switch ($request_uri[0]) {
     header('Location: /admin');
     break;
 
+  case '/updateAAction':
+  if (empty($_POST['image'])) {
+    $image = 'https://picsum.photos/300/200';
+  } else {
+    $image = $_POST['image'];
+  }
+    updateArtcl($_POST['id'], $_POST['title'], $_POST['content'], $image, $_POST['category']);
+    header('Location: /updateArtcl');
+    break;
+
   case '/deleteAction':
     // Recupere l'id de l'utilisateur dans l'uri
     deleteUser($request_uri[1]);
@@ -79,7 +98,7 @@ switch ($request_uri[0]) {
     header('Location: /');
     break;
 
-    case '/insertUser';
+  case '/insertUser';
     insertUser($_POST['name'], $_POST['password']);
     header('Location: /');
     break;

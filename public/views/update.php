@@ -2,7 +2,7 @@
 require_once('public/layouts/header.php');
 $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
 $user_id = ($request_uri[1]);
-if (checkRole($_SESSION['username']) === 1) { 
+if (checkRole($id) === 1) { 
 } else {
     header('Location: /login');
 }

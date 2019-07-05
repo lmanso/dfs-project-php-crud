@@ -4,7 +4,7 @@ function getAllArticles()
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT title, content, img, date, users.name as author, categories.name as category 
+  $request = $connec->prepare("SELECT articles.id as id_article, title, content, img, date, users.name as author, categories.name as category 
   FROM articles 
   LEFT JOIN users ON articles.user_id=users.id 
   LEFT JOIN categories ON articles.category_id=categories.id ;");
@@ -16,7 +16,7 @@ function getAllCategories()
 {
   $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT name FROM categories;");
+  $request = $connec->prepare("SELECT * FROM categories;");
   $request->execute();
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -43,19 +43,27 @@ function getUserArticles($user_id)
   // var_dump($request->execute());die;
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
-// TODO: recuperer un user par son id
 function getOneUser($user_id)
 {
   $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $request = $connec->prepare("SELECT name, role FROM users WHERE id = :id");
   $request->execute([
-    ":id" => $id,
-    // ":password" => $$pass_hache,
+    ":id" => $user_id,
   ]);
   return $request->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getOneArticle($article_id)
+{
+  $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $request = $connec->prepare("SELECT * FROM articles WHERE id = :id");
+  $request->execute([
+    ":id" => $article_id,
+  ]);
+  return $request->fetch(PDO::FETCH_ASSOC);
+}
 function getUserId($username)
 {
   $connec = new PDO('mysql:dbname=ublog; charset=utf8mb4', 'root', '0000');
@@ -151,5 +159,20 @@ function updateUser($id, $name, $role, $password)
     ":name" => $name,
     ":role" => $role,
     ":password" => $password,
+  ]);
+}
+
+function updateArtcl($id, $title, $content, $image, $category)
+{
+  $connec = new PDO("mysql:dbname=ublog; charset=utf8mb4", 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  // UPDATE users (name, role, password) VALUES ( Paul, 1, word) WHERE id=10
+  $request = $connec->prepare("UPDATE articles SET title = :title, content = :content, img = :image,  now(), category = :category  WHERE id= :id");
+  $request->execute([
+    ":id" => $id,
+    ":title" => $title,
+    ":content" => $content,
+    ":img" => $image,
+    ":category" => $category,
   ]);
 }
