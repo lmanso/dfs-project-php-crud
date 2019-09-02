@@ -2,10 +2,10 @@
 ## Sujet projet PHP niveau 2 "développement PHP"
 Durée : 5 jours
 
-----
+
 
 ## Contexte :
------
+
 Cette épreuve vise à évaluer votre capacité à développer un site en PHP . 
 C’est une d'une évaluation sur une technologie en particulier, les choix de l'environnement de développement et des technologies associées ne sont donc pas libres. 
 Aucun framework n’est autorisé. Outre son objectif d'évaluation, cette épreuve a vocation à venir enrichir votre portfolio personnel.
@@ -19,7 +19,7 @@ Le travail finalisé devra être rendu avant vendredi 17h00, l'horodatage du der
 
 
 ## Sujet
- ----
+
 Aspect fonctionnel
 
 Vous êtes freelance pour des projets web, vous avez un rdv client pour une création.
